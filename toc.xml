@@ -17,6 +17,12 @@
     </topic>
     <topic href="html/data/faq.html" label="F.A.Q.">
     </topic>
+    <topic href="html/datagen/guides/guides.html" label="Guide">
+       <topic href="html/datagen/guides/lookupresolvers/index.html" label="Risoluzione tabelle decodifica tramite LookupResolver">
+       </topic>
+       <topic href="guides/qbe/index.html" label="QBE - Query by example">
+       </topic>
+    </topic>
     <topic href="html/datagen/rationale.html" label="Appendice: design rationale">
     </topic>
     <topic href="html/datagen/bibl.html" label="Appendice: documenti di riferimento">

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Guida: QBE - Query By Example</title>
+   </head>
+
+   <body>
+      <h2>
+         Guida: QBE - Query By Example
+      </h2>
+      <p>
+         Questa guida descrive l'utilizzo della feature denominata <b>Query By Example</b>, 
+         corrispondente alla modellazione di un particolare tipo di <b>Finder</b>, il
+         <b>QBEFinder</b>.
+      </p>
+      <h3>Introduzione</h3>
+	<p>
+		Con il termine <b>Query by example</b> si intende una modalit&agrave; di indicare i criteri
+		di filtro per una query su un oggetto DB ben definito basata sulla predisposizione di due insiemi di esempi:
+		<ul>
+		<li>un insieme di esempi <i>positivi</i></li>
+		<li>un insieme di esempi <i>negativi</i></li>
+		</ul>
+		Il risultato di una query basata su tali insiemi di esempi &egrave; tale che l'insieme
+		dei risultati della query contiene tutti e soli gli elementi del DB che:
+		<ul>
+		<li>soddisfano (match) almeno uno degli esempi positivi</li>
+		<li>non soddisfano (don't match) nessuno degli esempi negativi</li>
+		</ul>
+	</p>      
+	<p>
+		Ad esempio, supponiamo di dover utilizzare tale tecnica su una tabella <i>Persona</i>
+		contenente le colonne:
+		<ul>
+		<li>codiceFiscale (stringa)</li>
+		<li>nome (stringa)</li>
+		<li>cognome (stringa)</li>
+		<li>eta (intero)</li>
+		</ul>
+		Supponiamo di dover effettuare la ricerca delle persone che soddisfano questi criteri:
+		<ul>
+		<li>sono maggiorenni</li>
+		<li>hanno il cognome che iniza per &quot;A&quot; oppure per &quot;F&quot;</li>
+		<li>NON si chiamano &quot;MARIO&quot;</li>
+		</ul>
+		Per realizzare tale query &egrave; necessario utilizzare il seguente insieme di esempi:
+		<ul>
+		<li>esempi positivi:
+			<ol>
+			<li>Esempio 1+:
+				<ul>
+				<li>cognome like ('%A%')</li>
+				<li>eta > 18</li> 
+				</ul>
+			</li>
+			<li>Esempio 2+:
+				<ul>
+				<li>cognome like ('%F%')</li>
+				<li>eta > 18</li> 
+				</ul>
+			</li>
+			</ol>
+		</li>
+		<li>esempi negativi:
+			<ol>
+			<li>Esempio 1-:
+				<ul>
+				<li>nome = 'MARIO'</li>
+				</ul>
+			</li>
+			</ol>
+		</li>
+		</ul>
+	</p>
+	<p>
+		Articolando opportunamente esempi posivi e negativi &egrave; possibile definire praticamente
+		qualsiasi criterio di filtro basato sull'analisi dei valori del singolo record.
+	</p>
+	<h3>Implementazione del QBE in datagen</h3>
+	<p>	
+		In datagen la modalit&agrave; QBE viene realizzata in due momenti:
+		<ol>
+		<li>a tempo di modellazione, definendo un <b>QBEFinder</b> tra le operazioni di un 
+		<b>DataAccessObject</b></li>
+		<li>a tempo di codifica java, sul progetto generato, richiamando il metodo generato a
+		fronte del <b>QBEFinder</b> e fornendo gli opportuni esempi.</li>
+		</ol>
+	</p>
+	<p>Nell'implementazione QBE fornita da datagen gli esempi sono classi java associate ai 
+	<b>DataAccessObject</b>, che assomigliano ai DTO per nome e numero dei campi, ma
+	se ne differenziano per quanto riguarda il tipo di tali campi.
+	Mentre infatti nei DTO il tipo dei campi &egrave; in pratica il tipo JDBC associato al tipo 
+	SQL della colonna associata a tale campo, nel caso degli <i>examples</i> il tipo &egrave; un 
+	tipo astratto: <code>FieldChk</code>.
+	Questo permette a chi popola gli esempi di introdurre per ciascun campo un criterio di filtro
+	specifico.
+	 </p>
+	 <p>
+	 Esistono differenti tipi di check su field che possono essere utilizzati, e sono disponibili
+	 nel package <code>qbe</code> generato da datagen in ogni progetto:
+	 <ul>
+	 <li>EQCheck: permette la verifica di una condizione di uguaglianza, eventualmente con tolleranza
+	 sul <i>case</i> del testo</li>
+	 <li>RangeCheck: permette a verifica di una condizione di appartenenza di un valore ad un 
+	 range continuo di valori delimitato da due estremi 8inferiore, superiore)</li>
+	 <li>NullCheck: permette di verificare se il valore di un cmapo &egrave; nullo o non nullo</li>
+	 </ul> 
+	 </p>
+	 <p>N.B: in futuro verranno aggiunti altri tipi di check. Allo stato attuale &egrave; possibile utilizzare solo questi tre tipi di check: il
+	 meccanismo non &egrave; estendibile in autonomia dall'utilizzatore.</p> 
+   </body>
+</html>
