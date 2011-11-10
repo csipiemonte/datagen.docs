@@ -24,6 +24,8 @@
 <td>
 <p>Direct Attributes</p>
 <ul>
+	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EInt.html">ecore :: EInt</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../datagen/classes/DataAccessObject.html#at_cacheTTLminutes">cacheTTLminutes</a></li>
+	<li><img src="../../icons/ecore/EEnum.gif" /><a href="../../datagen/datatypes/CacheabilityTypes.html">datagen :: CacheabilityTypes</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../datagen/classes/DataAccessObject.html#at_cacheability">cacheability</a></li>
 	<li><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EString.html">ecore :: EString</a> <img src="../icons/ecore/EAttribute.gif" /><a href="../../datagen/classes/DataAccessObject.html#at_name">name</a></li>
 </ul>
 
@@ -38,6 +40,7 @@
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/Deleters.html">datagen :: Deleters</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/DataAccessObject.html#re_deleters">deleters</a></li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/Finders.html">datagen :: Finders</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/DataAccessObject.html#re_finders">finders</a></li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/Inserter.html">datagen :: Inserter</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/DataAccessObject.html#re_inserter">inserter</a></li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/LookupResolvers.html">datagen :: LookupResolvers</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/DataAccessObject.html#re_lookupResolvers">lookupResolvers</a></li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../rdbmdl/classes/Table.html">rdbmdl :: Table</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/DataAccessObject.html#re_mainTable">mainTable</a></li>
 	<li><img src="../../icons/ecore/DAbstractClass.gif" /><a href="../../datagen/classes/PKGenerator.html">datagen :: PKGenerator</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/DataAccessObject.html#re_pkGenerator">pkGenerator</a></li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/Updaters.html">datagen :: Updaters</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/DataAccessObject.html#re_updaters">updaters</a></li>
@@ -59,8 +62,111 @@
 
 <p>Referenced by</p>
 <ul>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/DataAccessObject.html">datagen :: DataAccessObject</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/LookupResolver.html#re_supplierDAO">supplierDAO</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/LookupResolver.html">datagen :: LookupResolver</a>)</li>
 	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/DataAccessObject.html">datagen :: DataAccessObject</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/DaoPackage.html#re_dao">dao</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/DaoPackage.html">datagen :: DaoPackage</a>)</li>
 </ul>
+
+<h2><a name="at_cacheTTLminutes" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EInt cacheTTLminutes</h2>
+<p>Indica il Time To Live dell'eventuale cache</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EDataType.gif" /><a href="../../ecore/datatypes/EInt.html">ecore :: EInt</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>cacheTTLminutes</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="at_cacheability" /><img src="../icons/ecore/EAttribute.gif" />Attribute datagen :: CacheabilityTypes cacheability</h2>
+<p>Indica il tipo di variabilit&agrave; dei dati, utile per implementare eventuali meccanismi di caching</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EEnum.gif" /><a href="../../datagen/datatypes/CacheabilityTypes.html">datagen :: CacheabilityTypes</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>HIGHLY_VARIABLE_DATA</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>iD</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>cacheability</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
 
 <h2><a name="at_name" /><img src="../icons/ecore/EAttribute.gif" />Attribute ecore :: EString name</h2>
 <p>Nome logico del <b>DAO</b>. Deve essere un identificativo vlaido di classe java.</p>
@@ -276,6 +382,59 @@
 </tbody>
 </table>
 
+<h2><a name="re_lookupResolvers" /><img src="../icons/ecore/EReference.gif" />Reference datagen :: LookupResolvers lookupResolvers</h2>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/LookupResolvers.html">datagen :: LookupResolvers</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>containment</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>lookupResolvers</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>resolveProxies</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
 <h2><a name="re_mainTable" /><img src="../icons/ecore/EReference.gif" />Reference rdbmdl :: Table mainTable</h2>
 <p>Tabella su cui opera il <b>DAO</b></p>
 
@@ -440,4 +599,4 @@
 
 
 
-<div>generated on 6-set-2010 at 10.44.18 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
+<div>generated on 10-nov-2011 at 18.21.51 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>
