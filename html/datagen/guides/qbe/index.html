@@ -15,8 +15,9 @@
       </p>
       <h3>Introduzione</h3>
 	<p>
-		Con il termine <b>Query by example</b> si intende una modalit&agrave; di indicare i criteri
-		di filtro per una query su un oggetto DB ben definito basata sulla predisposizione di due insiemi di esempi:
+		Con il termine <b>Query by example</b> si intende una modalit&agrave; per indicare i criteri
+		di filtro per una query su un oggetto DB ben definito basata sulla predisposizione di due insiemi di
+		esempi:
 		<ul>
 		<li>un insieme di esempi <i>positivi</i></li>
 		<li>un insieme di esempi <i>negativi</i></li>
@@ -24,8 +25,8 @@
 		Il risultato di una query basata su tali insiemi di esempi &egrave; tale che l'insieme
 		dei risultati della query contiene tutti e soli gli elementi del DB che:
 		<ul>
-		<li>soddisfano (match) almeno uno degli esempi positivi</li>
-		<li>non soddisfano (don't match) nessuno degli esempi negativi</li>
+		<li>soddisfano (match) <i>almeno uno</i> degli esempi positivi</li>
+		<li>non soddisfano (don't match) <i>nessuno</i> degli esempi negativi</li>
 		</ul>
 	</p>      
 	<p>
@@ -43,7 +44,8 @@
 		<li>hanno il cognome che iniza per &quot;A&quot; oppure per &quot;F&quot;</li>
 		<li>NON si chiamano &quot;MARIO&quot;</li>
 		</ul>
-		Per realizzare tale query &egrave; necessario utilizzare il seguente insieme di esempi:
+		Per realizzare tale query in modalit&agrave; <i>QBE</i> &egrave; necessario utilizzare il seguente
+		insieme di esempi:
 		<ul>
 		<li>esempi positivi:
 			<ol>
@@ -74,7 +76,10 @@
 	</p>
 	<p>
 		Articolando opportunamente esempi posivi e negativi &egrave; possibile definire praticamente
-		qualsiasi criterio di filtro basato sull'analisi dei valori del singolo record.
+		qualsiasi criterio di filtro basato sull'analisi dei valori del singolo record. Tipicamente negli
+		applicativi gestionali, dove le ricerche sono spesso basate su una pagina di filtri di ricerca,
+		l'insieme degli esempi dati in pasto al generatore di query by example si riduce ad un numero molto 
+		ristretto (spesso 1) di esempi positivi.
 	</p>
 	<h3>Implementazione del QBE in datagen</h3>
 	<p>	
@@ -83,30 +88,34 @@
 		<li>a tempo di modellazione, definendo un <b>QBEFinder</b> tra le operazioni di un 
 		<b>DataAccessObject</b></li>
 		<li>a tempo di codifica java, sul progetto generato, richiamando il metodo generato a
-		fronte del <b>QBEFinder</b> e fornendo gli opportuni esempi.</li>
+		fronte del <b>QBEFinder</b> e fornendo gli opportuni esempi (positivi e negativi).</li>
 		</ol>
 	</p>
 	<p>Nell'implementazione QBE fornita da datagen gli esempi sono classi java associate ai 
 	<b>DataAccessObject</b>, che assomigliano ai DTO per nome e numero dei campi, ma
 	se ne differenziano per quanto riguarda il tipo di tali campi.
-	Mentre infatti nei DTO il tipo dei campi &egrave; in pratica il tipo JDBC associato al tipo 
+	Mentre infatti nei DTO il tipo dei campi &egrave; in pratica il tipo JDBC corrispondente al tipo 
 	SQL della colonna associata a tale campo, nel caso degli <i>examples</i> il tipo &egrave; un 
 	tipo astratto: <code>FieldChk</code>.
 	Questo permette a chi popola gli esempi di introdurre per ciascun campo un criterio di filtro
-	specifico.
+	specifico istanziando particolari tipi di <code>FieldChack</code>.
 	 </p>
 	 <p>
 	 Esistono differenti tipi di check su field che possono essere utilizzati, e sono disponibili
 	 nel package <code>qbe</code> generato da datagen in ogni progetto:
 	 <ul>
-	 <li>EQCheck: permette la verifica di una condizione di uguaglianza, eventualmente con tolleranza
+	 <li><b>EQCheck</b>: permette la verifica di una condizione di uguaglianza, eventualmente con tolleranza
 	 sul <i>case</i> del testo</li>
-	 <li>RangeCheck: permette a verifica di una condizione di appartenenza di un valore ad un 
-	 range continuo di valori delimitato da due estremi 8inferiore, superiore)</li>
-	 <li>NullCheck: permette di verificare se il valore di un cmapo &egrave; nullo o non nullo</li>
+	 <li><b>RangeCheck</b>: permette a verifica di una condizione di appartenenza di un valore ad un 
+	 range continuo di valori delimitato da due estremi (inferiore, superiore)</li>
+	 <li><b>NullCheck</b>: permette di verificare se il valore di un cmapo &egrave; nullo o non nullo</li>
 	 </ul> 
 	 </p>
-	 <p>N.B: in futuro verranno aggiunti altri tipi di check. Allo stato attuale &egrave; possibile utilizzare solo questi tre tipi di check: il
-	 meccanismo non &egrave; estendibile in autonomia dall'utilizzatore.</p> 
+	 <p>N.B: in futuro verranno aggiunti altri tipi di check. Allo stato attuale &egrave; possibile 
+	 utilizzare solo questi tre tipi di check: il meccanismo non &egrave; estendibile in autonomia 
+	 dall'utilizzatore.</p> 
+	 <h3>Approfondimenti</h3>
+    <p>Esempi pratici dell'utilizzo della modalit&agrave; <b>query-by-example</b> si possono trovare all'
+    interno della <i>Reference Application MDD</i>.</p>
    </body>
 </html>
