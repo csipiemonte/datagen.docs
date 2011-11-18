@@ -15,12 +15,14 @@
     </topic>
     <topic href="html/datagen/cartridges.html" label="Cartridges">
     </topic>
-    <topic href="html/data/faq.html" label="F.A.Q.">
+    <topic href="html/datagen/faq.html" label="F.A.Q.">
     </topic>
     <topic href="html/datagen/guides/guides.html" label="Guide">
        <topic href="html/datagen/guides/lookupresolvers/index.html" label="Risoluzione tabelle decodifica tramite LookupResolver">
        </topic>
-       <topic href="guides/qbe/index.html" label="QBE - Query by example">
+       <topic href="html/datagen/guides/qbe/index.html" label="QBE - Query by example">
+       </topic>
+       <topic href="html/datagen/guides/querydef/index.html" label="Custom finder multitabella con query modellata">
        </topic>
     </topic>
     <topic href="html/datagen/rationale.html" label="Appendice: design rationale">
