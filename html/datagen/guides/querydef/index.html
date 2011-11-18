@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Guida: CustomFinder multitabella con query modellata</title>
+   </head>
+
+   <body>
+      <h2>
+         Guida: CustomFinder multitabella con query modellata
+      </h2>
+      <p>
+         Questa guida descrive un particolare modalit&agrave; di utilizzo del <b>CustomFinder</b>, 
+         ovvero quella che prevede la modellazione quasi completa della query in luogo della
+         sua codifica manuale in linguaggio java.
+      </p>
+      <h3>Introduzione</h3>
+	<p>
+		Il <b>CustomFinder</b> &egrave; una particolare tipologia di finder che viene in aiuto del
+		programmatore allorquando sia necessario definire una query con un criterio di filtro molto
+		particolare, che non possa essere realizzato agevolmente tramite le altre tipologie di
+		<b>Finder</b>.
+		La versione originaria (precedentemente alla v. 1.2.0 di datagen) del <b>CustomFinder</b> 
+		prevedeva la necessit&agrave; da parte dello sviluppatore di codificare manualmente
+		(all'interno di apposite regioni progette) la query da realizzare, con le seguenti limitazioni:
+		<ul>
+		<li>il risultato del <b>CustomFinder</b> pu&ograve; essere sempre solo un elenco di
+		DTO relativo alla <i>main table</i> del <b>DataAccessObject</b> a cui appartiene il
+		<b>Finder</b></li>
+		<li>E' possibile referenziare pi&ugrave; di una tabella nella clausola from, a patto
+		che si imposti il flag <i>customFrom=true</i> nel <b>CustomFinder</b>, ma queste tabelle
+		aggiuntive possono essere solo utilizzate per la realizzazione di join, senza che
+		per&ograve; le colonne aggiuntive derivante da tali tabelle aggiuntive possano
+		essere restituite in output</li>
+		</ul>
+	</p>      
+	<p>
+		Queste limitazioni creavano spesso la necessit&agrave; di creare dei DAO custom (interamente
+		scritti a mano) per la realizzazione delle query non mono-tabella, rendendo di fatto limitato
+		alle funzionalit&agrave; CRUD monotabella l'utilizzo del tool.
+	</p>
+	<p>
+		Dalla versione 1.2.0 &egrave; invece possibile utilizzare il <b>CustomFinder</b> in una nuova
+		modalit&agrave; che prevede la modellazione quasi totale della query e rimuove alcune delle
+		limitazioni viste in precedenza.
+	</p>
+	<h3>CustomFinder con QueryDef</h3>
+	<p>	
+		Per utilizzare questa nuova modalit&agrave; &egrave; necessario modellare all'interno di un
+		<b>CustomFinder</b> un elemento di tipo <b>QueryDef</b>. Come pu&ograve; far intuire il
+		nome questo elemento permette di definire mediante modellazione una query utilizzando le
+		consuete metafore proprie del linguaggio SQL, ovvero:
+		<ul>
+		<li>scelta delle tabelle da utilizzare nella query (FROM)</li>
+		<li>scelta delle colonne (calcolate o proprie) che devono essere mandate in 
+		output (SELECT)</li>
+		<li>impostazione di eventuali criteri di JOIN sulle tabelle selezionate</li>
+		<li>impostazione dei criteri di selezione aggiuntivi a quelli impliciti al JOIN (WHERE)</li>
+		<li>criteri di ordinamento delle colonne</li>
+		</ul> 
+	</p>
+	<h4>Elementi costituenti del QueryDef</h4>
+	<h5>clausola FROM</h5>
+	 <p>
+	 Serve per defnire l'elenco delle tabelle che devono essere considerate nella query. La 
+	 semantica &egrave; esattamente la stessa del linguaggio SQL puro. La clausola <b>From</b>
+	 contiene una o pi&ugrave; elementi di tipo <b>QTable</b> (Query-Table): ciascun elemento
+	 di questo tipo referenzia una <b>Table</b> effettiva e permette di specificare un <i>alias</i>,
+	 che viene utilizzato tipicamente per disambiguare la query in caso vi siano occorrenze ripetute
+	 della stessa tabella. La presenza di una <b>QTable</b> nell'elemento <b>From</b> implica
+	 la presenza della tabella specificata nella clausola FROM della query SQL generata (con l'
+	 eventuale presenza dell'alias, se specificato).  
+	 </p>
+
+	<h5>clausola SELECT</h5>
+	<p>
+	Permette di definire l'elenco delle colonne che verranno inviate in output. Non vi &egrave;
+	pi&ugrave; nessun legame stretto con la <i>mainTable</i>; &egrave; infatti possibile inviare
+	in output due tipologie di colonne:
+	<ul>
+	<li><b>QTableColumn</b>: una qualsiasi tra le colonne delle tabelle referenziate nella
+	clausola <b>From</b> sotto forma di <b>QTable</b>. Per definire correttamente una
+	<b>QTableColumn</b> occorre:
+		<ol>
+		<li>selezionare la <b>QTable</b> a cui appartiene la colonna che si vuole inviare in output
+		(l'editor proporr&agrave; la scelta di tutte e sole le <b>QTable</b> presenti nella
+		clausola <b>From</b>)</li>
+		<li>selezionare la colonna che si vuole inviare in output (l'editor proporr&agrave; la
+		scelta delle sole colonne appartenenti alla tabella selezionata al punto precedente)</li>
+		<li>impostare un eventuale <i>alias</i> per la colonna</li>
+		</ol> 
+	</li>
+	<li><b>QCalculatedColumn</b>: una colonna calcolata applicando una espressione SQL
+	ad un insieme finito di colonne, scelte tra quelle disponibili a seconda delle tabelle
+	selezionate nella clausola <b>From</b>. Per definire correttamente una <b>QCalculatedColumn</b>
+	&egrave; necessario:
+		<ol>
+		<li>creare tante <b>QTableColumn</b> all'interno dell'elemento <b>QCalculatedColumn</b>
+		quante sono le colonne che concorrono alla valutazione dell'espressione (l'editor proporr&agrave;
+		un insieme di scelte ristrette per quanto riguarda le tabelle e quindi le colonne a seconda di
+		quanto defiito nell'elemento <b>From</b>)</li>
+		<li>definire l'espressione nella property <i>freetextExpression</i> in un formato che prevede
+		l'impostazione di tanti segnaposto ($1, $2, ... $n) quante sono le colonne che concorrono
+		alla valutazione dell'espressione. La correttezza sintattica di questa espressione &egrave;
+		a carico dello sviluppatore. Esempio: <code>upper($1) || '-' || to_date($2, 'dd-MM-yyyy')</code></li>
+		<li>definire il tipo della colonna calcolata (che non pu&ograve; essere inferito
+		automaticamente dalle restanti informazioni)</li>
+		</ol>
+	</li>
+	</ul>
+	</p>
+	
+	<h5>clausola JOIN</h5>
+	<p>
+	Nel caso siano state specificate due o pi&ugrave; <b>QTable</b> all'interno dell'elemento
+	<b>From</b> &egrave; possibile specificare i criteri di <b>Join</b> tra tali tabelle. Per far
+	ci&ograve; &egrave; necessario definire una serie di elementi di tipo <b>JoinCriterion</b>, ciascuno 
+	dei quali permette di specificare un vincolo di uguaglianza tra due colonne di due tabelle (
+	le due tabelle sono identificate all'interno dell'elemento come <i>left table/column</i> e
+	<i>right table/column</i>).
+	</p>
+	
+	<h5>clausola WHERE</h5>
+	<p>Oltre al criterio di selezione implicito nella presenza di una eventuiale clausola JOIN
+	&egrave; possibile specificare il vero e proprio criterio di selezione, tramite la definizione
+	di un elemento di tipo <i>Where</i>. Il criterio deve essere definito a testo libero 
+	e pu&ograve; contenere segnaposto nel formato: &quot;<code>:&lt;nome_parametro&gt;</code>&quot;</p>
+	<p>All'interno dell'unica regione protetta generata nel metodo java corrispondente al 
+	<b>CustomFinder</b> &egrave; poi necessario impostare il valore a runtime di tali parametri,
+	con la sintassi utilizzata per i <b>CustomFinder</b> &quot;vecchia maniera&quot;. La correttezza
+	della sintassi dell'espressione di filtro &egrave; a carico dello sviluppatore. In particolare
+	esso dovr&agrave; tener conto di eventuali alias utilizzati nella definizione di 
+	<b>QTable</b> e <b>QTableColumn</b>.</p>
+	
+	<br>
+	<p>Nella figura seguente &egrave; rappresentato un esempio di <b>CustomFinder</b> con 
+	<b>QueryDef</b></p>
+	<img src="img/querydef1.jpg" />
+	
+	<h3>Analisi del codice generato</h3>
+	<p>
+	Nella modalit&agrave; <b>QueryDef</b> il tipo di ritorno del metodo generato in corrispondenza del 
+	<b>CustomFinder</b> non &egrave; il tipo del DTO associato alla <i>mainTable</i> del
+	<b>DataAccessObject</b>, bens&igrave; &egrave; un tipo specifico per ciascun finder modellato in 
+	questa modalit&agrave;. Nell'esempio riportato nella figura precedente, che &egrave; 
+	relativo ad un <b>CustomFinder</b> di nome &quot;conInfoAggiuntive&quot; definito nel
+	<b>DataAccessObject</b> &quot;Cittadino&quot;, il nome della classe che conterr&agrave;
+	ciascun elemento in output sar&agrave;: <code>CittadinoConInfoAggiuntiveDto</code> e conterr&agrave;
+	i campi relativi alle colonne (calcolate o no) definite nella clausola <b>Select</b>.  
+	</p>
+	
+	<h3>Note aggiuntive / limitazioni</h3>
+	<p>Nel caso di <b>CustomFider</b> con <b>QueryDef</b> non viene utilizzato il meccanismo dei
+	<b>LookupResolver</b></p>
+	<p>Allo stato attuale non &egrave; possibile:
+	<ul>
+	<li>utilizzare la clausola DISTINCT</li>
+	<li>utilizzare funzioni di aggregazione nelle <b>QCalculatedColumn</b></li>
+	<li>definire condizioni di <b>Join</b> basate su particolari interpretazioni del valore nullo di uno dei 
+	due elementi in join (&egrave; per&ograve; possibile eventualmente definire tali particolari condizioni nella
+	clausola <b>Where</b>)</li>
+	<li>restituire in output il tipo del DTO associato alla <i>mainTable</i> del <b>DataAccessObject</b>
+	nemmeno nel caso in cui l'unica tabella selezionata nella clausola <b>From</b> sia proprio la <i>mainTable</i>.</li>
+	<li>ottenere la stessa classe java come tipo di output di due <b>CustomFinder</b> con <b>QueryDef</b>
+	nemmeno se i due finder condividono esattamente le stesse colonne in output.</li>
+	</ul>
+	</p>
+	 <h3>Approfondimenti</h3>
+    <p>Esempi pratici dell'utilizzo della modalit&agrave; <b>QueryDef</b> dei <b>CustomFinder</b>
+    si possono trovare all'interno della <i>Reference Application MDD</i>.</p>
+   </body>
+</html>
