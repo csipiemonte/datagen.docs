@@ -23,6 +23,8 @@
       <ul>
       <li><code>datagen.jdbc.oracle.drivers</code>, deve essere impostato con il percorso completo del 
       jar dei driver oracle, es. : <code>C:/devtools/libraries/jdbc/oracle/ojdbc14-10.2.0.3.0.jar</code></li>
+	  <li><code>datagen.jdbc.postgresql.drivers</code>, deve essere impostato con il percorso completo del 
+      jar dei driver postgresql, es. : <code>C:/devtools/libraries/jdbc/postgresql/postgresql-9.0-801.jdbc3.jar</code></li>
       </ul>
 	  Di seguito un esempio di file di configurazione:
 	  <pre>
@@ -57,17 +59,27 @@ openFile
       <p>All'avvio del wizard &egrave; necessario: 
       <ul>
       <li>selezionare la cartella dove verrà creato il risultato del reverse engineering</li>
-      <li>impostare il nome del file (estensione <code>.rdbmdl</code>).
+      <li>impostare il nome del file (estensione <code>.rdbmdl</code>).</li>
+      <li>selezionare il tipo di DBMS che ospita lo schema dati (<i>oracle</i> o <i>postgresql</i>)</li>
       <li>impostare l'url <i>jdbc</i> di connessione al DB</li>
       <li>impostare lo username e la password di connessione</li>
-      <li>impostare il nome dello schema (tipicamente in oracle coincide con l'utente)</li>
+      <li>selezionare il pulsante &quot;connect!&quot; per effettuare la connessione al DB.</li>
+      <li>se l'operazione ha successo nella lista &quot;schema name&quot; comparirà l'elenco degli schemi visibili dall'
+      utente specificato. A questo punto &egrave; necessario selezionare lo schema di cui si vuole effettuare il
+      reverse engineering.</li>
+      <li>premere il pulsante &quot;finish&quot; per lanciare l'algoritmo di estrazione dei metadati</li>
       </ul>
       </p>
-      <img src="../img/reverse_wizard.gif" alt="schermata del wizard di reverse engineering"/>
+      <img src="img/reverse_wizard.gif" alt="schermata del wizard di reverse engineering"/>
       <p>
       Al termine dell'esecuzione del wizard sar&agrave; disponibile alla posizione indicata un modello
       che contiene le strutture DB del database selezionato. 
       </p>
-      <img src="../img/sample_rdbmdl_1.gif" />
+      <p>
+      In caso di problemi comparir&agrave; un messaggio di errore nella parte superiore della schermata. Se l'errore
+      riguarda problemi di reperimento delle classi del driver jdbc, &egrave; necessario verificare le impostazioni
+      descritte in precedenza.
+      </p>
+      <img src="img/sample_rdbmdl_1.gif" />
    </body>
 </html>
