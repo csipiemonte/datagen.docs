@@ -9,6 +9,8 @@
        <topic href="html/datagen/tutorials/helloworld/helloworld.html" label="Tutorial: hello data!">
        </topic>
     </topic>
+    <topic href="html/datagen/features/datagen/index.html" label="Features">
+    </topic>
     <topic href="html/datagen/mm_reference.html" label="Guida di riferimento metamodello">
     </topic>
     <topic href="html/datagen/models_structure.html" label="Struttura e dipendenza dei modelli">

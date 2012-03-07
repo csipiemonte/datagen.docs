@@ -1,0 +1,173 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Elemento di catalogo: QueryDef</title>
+      <link type="text/css" href="./../../..//css/style.css" rel="stylesheet"/>
+   </head>
+
+   <body>
+   	  <a href="./../../../dataAccess/finders/index.html">torna all'elenco degli elementi della sezione finders</a>
+   	  <h1>Elemento di catalogo: QueryDef </h1>
+      <h2>Descrizione</h2>
+      <div class="itemDescription">
+      <p>Questa feature permette di modellare una query con costrutti analoghi a quelli messi a disposizione dal linguaggio SQL. L'elemento &egrave; utilizzato in congiunzione con il
+<b>CustomFinder</b>.</p>
+      </div>
+      
+      <h2>Caratteristiche (features)</h2>
+      <table class="features">
+      <thead><th>cod.</th><th>nome</th><th>descrizione</th></thead>
+      <tbody>
+      
+	<tr>
+	<td class="featureCod">QRYDEF001</td>
+	<td class="featureName">table column in select clause</td>
+	<td class="featureDescr"><p>Tramite il costrutto <b>QTableColumn</b> (Query-Table-Column) &egrave; possibile restituire in output il valore di una colonna di una tabella tra quelle
+incluse nella clausola <i>FROM</i> della definizione della query. Poich&egrave; una tabella pu&ograve; essere referenziata pi&ugrave; volte in una query
+(tramite il costrutto <b>QTable</b> (Query-Table) in questo caso &egrave; possibile specificare a quale tabella appartiene effettivamente la colonna da inviare 
+in output</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">QRYDEF002</td>
+	<td class="featureName">calculated column in select clause</td>
+	<td class="featureDescr"><p>Tramite il costrutto <b>QCalculatedColumn</b> (Query-Calculated-Column) &egrave; possibile restituire in output in valore calcolato applicando una espressione SQL ad una
+o pi&ugrave; colonne delle tabelle tra incluse nella clausola <i>FROM</i> della definizione della query. Per definire l'espressione &egrave; possibile scrivere in testo libero l'espressione
+stessa, con la possibilit&agrave; di inserire segnaposto per le varie colonne  (pattern: <i>$n</i>, con <i>n</i> da 1 a N, se <i>N</i> &egrave; il numero di colonne su cui si basa l'espressione)</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">QRYDEF003</td>
+	<td class="featureName">column alias in select clause</td>
+	<td class="featureDescr"><p>
+E' possibile associare un alias a ciascuna colonna referenziata nella clausola <i>SELECT</i>.  Nel caso delle colonne calcolate tale impostazione &egrave; obbligatoria. La presenza o meno di un alias
+di colonna, unito alla presenza o meno di un alias di tabella comporter&agrave; differenti politiche di naming delle property java del DTO. Il nome sar&agrave; costiuito da due parti:
+<code>&lt;partetabella&gt;&lt;Partecolonna&gt;</code>: ciascuna delle due parti &egrave; valorizzata con il valore dell'attributo <i>name</i> se non &egrave; impostato l'<i>alias</i>, 
+o con il valore dell'<i>alias</i> altrimenti.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">QRYDEF004</td>
+	<td class="featureName">multiple table in from clause</td>
+	<td class="featureDescr"><p>
+Tramite il costrutto <b>QTable</b> (Query-Table) &egrave; possibile includere nella costruzione della query pi&ugrave; tabelle. Una volta incluse nella clausola <i>FROM</i>
+sar&agrave; possibile referenziare le singole tabelle nel resto della query 
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">QRYDEF005</td>
+	<td class="featureName">table alias in from clause</td>
+	<td class="featureDescr"><p>
+E' possibile impostare un alias di tabella nella clausola <i>FROM</i>. Questo permette di referenziare pi&ugrave; volte la stessa tabelle (per tutte le casistiche che richiedono questa
+situazione nel linguaggio SQL - es. join, relazioni multiple verso la stessa tabella, ...).
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">QRYDEF006</td>
+	<td class="featureName">equality join clause</td>
+	<td class="featureDescr"><p>
+E' possibile specificare una o pi&ugrave; condizioni di join con condizione di uguaglianza tra due colonne di due tabelle incluse nella clausola <i>FROM</i>.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">QRYDEF0067</td>
+	<td class="featureName">custom where clause</td>
+	<td class="featureDescr"><p>
+E' possibile definire la clausola <i>WHERE</i> descrivendo (in testo libero) l'espressione SQL di filtro. Questa espressione sar&agrave; aggiunta in <i>AND</i>
+ad una eventuale espressione derivante dall'insieme delle clausole di <i>JOIN</i> eventualmente presenti.
+L'espressione pu&ograve; contenere segnaposto nel formato <code>:parametro</code>. Tali segnaposto devoo essere valorizzati nella porzione di codice manuale 
+scritta nel metodo corrispondente al <b>CustomFinder</b>.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">QRYDEF008</td>
+	<td class="featureName">complex result DTO</td>
+	<td class="featureDescr"><p>
+A fronte della presenza di un elemento <b>QueryDef</b> in un <b>CustomFinder</b> il metodo restituisce un DTO specifico costruito con tante property quante sono le colonne
+(reali o calcolate) incluse nella clausola <i>SELECT</i>. Il nome delle singole property dipende:
+<ul>
+<li>dal name delle tabelle</li>
+<li>dal name delle colonne</li>
+<li>da eventuali alias di colonna o tabella</li>
+</ul>
+</p>
+	</td>
+	</tr>
+
+      
+      </tbody>
+      </table>
+      
+      
+      <h2>Grado di implementazione delle varie caratteristiche</h2>
+      <p>
+      Nella tabella seguente &egrave; riportato il grado di implementazione delle
+      varie caratteristiche/funzioni dell'elemento <b>QueryDef</b> nelle differenti implementazioni.
+      </p>
+      
+
+<table class="compMatrixTable">
+<thead>
+<tr><th class="matrixTH" rowspan="3">cod</th><th class="matrixTH" rowspan="3">feature</th>
+ <th colspan="1" class="matrixTH product">datagen</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th colspan="1" class="matrixTH productVersion">2.0.0</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th class="matrixTH productEdition">standard</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>QRYDEF001</td><td class="feature">table column in select clause</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>QRYDEF002</td><td class="feature">calculated column in select clause</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>QRYDEF003</td><td class="feature">column alias in select clause</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>QRYDEF004</td><td class="feature">multiple table in from clause</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>QRYDEF005</td><td class="feature">table alias in from clause</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>QRYDEF006</td><td class="feature">equality join clause</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>QRYDEF0067</td><td class="feature">custom where clause</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>QRYDEF008</td><td class="feature">complex result DTO</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+
+</tbody>
+</table>
+
+   </body>
+</html>

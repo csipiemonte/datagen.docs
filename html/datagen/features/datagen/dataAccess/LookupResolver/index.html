@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Elemento di catalogo: LookupResolver</title>
+      <link type="text/css" href="./../..//css/style.css" rel="stylesheet"/>
+   </head>
+
+   <body>
+   	  <a href="./../../dataAccess/index.html">torna all'elenco degli elementi della sezione dataAccess</a>
+   	  <h1>Elemento di catalogo: LookupResolver </h1>
+      <h2>Descrizione</h2>
+      <div class="itemDescription">
+      <p>
+Il meccanismo del <b>LookupResolver</b> permette di istruire il <b>DataAccessObject</b> in modo da risolvere le associazioni
+<i>N-1</i>, in particolar modo quelle relative a tabelle di decodifica (tipicamente conosciute come associazioni di <i>lookup</i>).
+</p>
+      </div>
+      
+      <h2>Caratteristiche (features)</h2>
+      <table class="features">
+      <thead><th>cod.</th><th>nome</th><th>descrizione</th></thead>
+      <tbody>
+      
+	<tr>
+	<td class="featureCod">LKPRES001</td>
+	<td class="featureName">aggregate DTO</td>
+	<td class="featureDescr"><p>
+In presenza di <b>LookupResolver</b> il DTO che viene associato ad un <b>DataAccessObject</b> &egrave; costruito in modo 
+strutturato, contrariamente al DTO classico che contiene una property per ciascuna colonna della tabella principale associata al
+<b>DataAccessObject</b>.
+</p>
+<p>
+In particolare il DTO non contiene le property corrispondenti alle colonne incluse nella <b>ForeignKey</b> associata al <b>LookupResolver</b>;
+Al loro posto il DTO contiene una property che ha il tipo del DTO corrispondente alla tabella <i>risolta</i>: in pratica la property ha il tipo del DTO
+del <b>DataAccessObject</b> dichiarato come <i>supplierDao<i>.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">LKPRES002</td>
+	<td class="featureName">supplier DAO</td>
+	<td class="featureDescr"><p><p>
+La risoluzione degli oggetti di <i>lookup</i> viene effettuata tramite l'ausilio del <b>DataAccessObject</b> corrispondente alla tabella referenziata 
+dalla <b>ForeignKey</b>. Qualsiasi operazione di lettura azionata su un <b>DataAccessObject</b> che definisce un <b>LookupResolver</b>
+al momento della materializzazione del singolo record di risultato, delega la valorizzazione dell'oggetto di decodifica al <i>supplier DAO</i>, richiamandone
+il metodo di ricerca per chiave primaria. 
+</p>
+	
+		<ul>
+	
+		<li>
+			<a href="./../../dataAccess/DataAccessObject/index.html">DataAccessObject</a>
+		</li>
+
+		</ul>
+
+	</p>
+	<p>
+	</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">LKPRES003</td>
+	<td class="featureName">structured Example DTO</td>
+	<td class="featureDescr"><p>
+In presenza di <b>LookupResolver</b> il DTO che viene associato ad un <b>DataAccessObject</b> per essere utilizzato come <i>esempio</i> nel
+meccanismo di <b>Query By Example</b> &egrave; costruito in modo  strutturato, contrariamente al DTO classico che contiene una property di tipo 
+<code>FieldChk</code> per ciascuna colonna della tabella principale associata al <b>DataAccessObject</b>. 
+</p>
+<p>
+In particolare il DTO di esempio non contiene le property corrispondenti alle colonne incluse nella <b>ForeignKey</b> associata al <b>LookupResolver</b>;
+Al loro posto il DTO contiene una property che ha il tipo del DTO di <i>example</i> corrispondente alla tabella <i>risolta</i>: in pratica la property ha il tipo del DTO
+di <i>example</i> del <b>DataAccessObject</b> dichiarato come <i>supplierDao<i>.
+</p>
+	</td>
+	</tr>
+
+      
+      </tbody>
+      </table>
+      
+      
+      <h2>Grado di implementazione delle varie caratteristiche</h2>
+      <p>
+      Nella tabella seguente &egrave; riportato il grado di implementazione delle
+      varie caratteristiche/funzioni dell'elemento <b>LookupResolver</b> nelle differenti implementazioni.
+      </p>
+      
+
+<table class="compMatrixTable">
+<thead>
+<tr><th class="matrixTH" rowspan="3">cod</th><th class="matrixTH" rowspan="3">feature</th>
+ <th colspan="1" class="matrixTH product">datagen</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th colspan="1" class="matrixTH productVersion">2.0.0</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th class="matrixTH productEdition">standard</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>LKPRES001</td><td class="feature">aggregate DTO</td>
+<td><img src="./../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>LKPRES002</td><td class="feature">supplier DAO</td>
+<td><img src="./../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>LKPRES003</td><td class="feature">structured Example DTO</td>
+<td><img src="./../../img/yes.gif" /></td>
+</tr>
+
+</tbody>
+</table>
+
+   </body>
+</html>

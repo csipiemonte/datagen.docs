@@ -1,0 +1,100 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Elemento di catalogo: CustomUpdater</title>
+      <link type="text/css" href="./../../..//css/style.css" rel="stylesheet"/>
+   </head>
+
+   <body>
+   	  <a href="./../../../dataAccess/updaters/index.html">torna all'elenco degli elementi della sezione updaters</a>
+   	  <h1>Elemento di catalogo: CustomUpdater </h1>
+      <h2>Descrizione</h2>
+      <div class="itemDescription">
+      <p>
+Operazione di aggiornamento dati che permette di aggiornare tutte le colonne della tabella relativamente ad uno o pi&ugrave; record.
+La logica di selezione e di attribuzione dei valori &egrave; altamente personalizzabile tramite la scrittura di codice java.
+</p>
+      </div>
+      
+      <h2>Caratteristiche (features)</h2>
+      <table class="features">
+      <thead><th>cod.</th><th>nome</th><th>descrizione</th></thead>
+      <tbody>
+      
+	<tr>
+	<td class="featureCod">UPDCUS001</td>
+	<td class="featureName">update main table columns</td>
+	<td class="featureDescr"><p>
+L'<b>UpdateRow</b> permette l'aggiornamento dei valori delle colonne di un record contenuto nella tabella associata al <b>DataAccessObject</b>. 
+I record oggetto di aggiornamento sono selezionati con logica custom scritt ain linguaggio java all'interno del metodo di update.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">UPDCUS002</td>
+	<td class="featureName">custom filter class</td>
+	<td class="featureDescr"><p>
+Per permettere la personalizzazione della logica di selezione dei record da modificare &egrave; possibile specificare il full qualified name della classe che verr&agrave; utilizzata
+come parametro di input per contenere i criteri di selezione (filter class). E' possibile specificare il nome completo della classe oppure utilizzare gli shortcut ${dto} e ${dto[]) per indicare rispettivamente la classe del DTO associato al DAO e un array di tale classe. E' compito dello sviluppatore scriver eil codice java che sfrutta i valori contenuti in questo oggetto per effettuare
+la selezione dei record da modificare.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">UPDCUS003</td>
+	<td class="featureName">custom value class</td>
+	<td class="featureDescr"><p>
+Per permettere la personalizzazione della logica di attribuzione dei nuovi valori ai record da modificare &egrave; possibile specificare il full qualified name della classe che verr&agrave; utilizzata
+come parametro di input per contenere tali valori (value class). E' possibile specificare il nome completo della classe oppure utilizzare gli shortcut ${dto} e ${dto[]) per indicare rispettivamente la classe del DTO associato al DAO e un array di tale classe. E' compito dello sviluppatore scriver eil codice java che sfrutta i valori contenuti in questo oggetto per effettuare
+l'impostazione dei valori nei record da modificare.
+</p>
+	</td>
+	</tr>
+
+      
+      </tbody>
+      </table>
+      
+      
+      <h2>Grado di implementazione delle varie caratteristiche</h2>
+      <p>
+      Nella tabella seguente &egrave; riportato il grado di implementazione delle
+      varie caratteristiche/funzioni dell'elemento <b>CustomUpdater</b> nelle differenti implementazioni.
+      </p>
+      
+
+<table class="compMatrixTable">
+<thead>
+<tr><th class="matrixTH" rowspan="3">cod</th><th class="matrixTH" rowspan="3">feature</th>
+ <th colspan="1" class="matrixTH product">datagen</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th colspan="1" class="matrixTH productVersion">2.0.0</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th class="matrixTH productEdition">standard</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>UPDCUS001</td><td class="feature">update main table columns</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>UPDCUS002</td><td class="feature">custom filter class</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>UPDCUS003</td><td class="feature">custom value class</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+
+</tbody>
+</table>
+
+   </body>
+</html>
