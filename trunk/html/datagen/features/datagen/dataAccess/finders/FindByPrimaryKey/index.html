@@ -1,0 +1,111 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Elemento di catalogo: FindByPrimaryKey</title>
+      <link type="text/css" href="./../../..//css/style.css" rel="stylesheet"/>
+   </head>
+
+   <body>
+   	  <a href="./../../../dataAccess/finders/index.html">torna all'elenco degli elementi della sezione finders</a>
+   	  <h1>Elemento di catalogo: FindByPrimaryKey </h1>
+      <h2>Descrizione</h2>
+      <div class="itemDescription">
+      <p>
+Mediante questa operazione di ricerca &egrave; possibile estrarre un singolo record della tabella associata
+al <b>DataAccessObject</b>, effettuando una ricerca tramite chiave primaria.
+</p>
+      </div>
+      
+      <h2>Caratteristiche (features)</h2>
+      <table class="features">
+      <thead><th>cod.</th><th>nome</th><th>descrizione</th></thead>
+      <tbody>
+      
+	<tr>
+	<td class="featureCod">FNDBYPK001</td>
+	<td class="featureName">select by primary key</td>
+	<td class="featureDescr"><p>
+Il risultato dell'operazione <b>FindByPK</b> &egrave; un unico record la cui chiave primaria corrisponde a quella
+fornita in input. Se non viene trovata una corrispondenza alla chiave fornita il risultato &egrave; <code>null</code>.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDBYPK002</td>
+	<td class="featureName">read main table columns</td>
+	<td class="featureDescr"><p>
+Il risultato della operazione contiene tutte le colonne della tabella principale associata al <b>DataAccessObject</b>, 
+a meno che non venga utilizzata la funzione di <b>LookupResolver</b> (v.)
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDBYPK003</td>
+	<td class="featureName">read resolved lookup</td>
+	<td class="featureDescr"><p>
+A fronte della presenza nel <b>DataAccessObject</b> di un <b>LookupResolver</b>, il risultato della operazione contiene il DTO di lookup invece che le colonne 
+corrispondenti alla <b>ForeignKey</b>. Il nome della property &egrave; derivato dall'attributo <i>name</i> del <b>LookupResolver</b>.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDBYPK004</td>
+	<td class="featureName">cachable</td>
+	<td class="featureDescr"><p>
+Se il <b>DataAccessObject</b> lo prevede, l'operazione di <b>FindByPK</b> utilizza la cache
+</p>
+	</td>
+	</tr>
+
+      
+      </tbody>
+      </table>
+      
+      
+      <h2>Grado di implementazione delle varie caratteristiche</h2>
+      <p>
+      Nella tabella seguente &egrave; riportato il grado di implementazione delle
+      varie caratteristiche/funzioni dell'elemento <b>FindByPrimaryKey</b> nelle differenti implementazioni.
+      </p>
+      
+
+<table class="compMatrixTable">
+<thead>
+<tr><th class="matrixTH" rowspan="3">cod</th><th class="matrixTH" rowspan="3">feature</th>
+ <th colspan="1" class="matrixTH product">datagen</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th colspan="1" class="matrixTH productVersion">2.0.0</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th class="matrixTH productEdition">standard</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>FNDBYPK001</td><td class="feature">select by primary key</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDBYPK002</td><td class="feature">read main table columns</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDBYPK003</td><td class="feature">read resolved lookup</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDBYPK004</td><td class="feature">cachable</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+
+</tbody>
+</table>
+
+   </body>
+</html>

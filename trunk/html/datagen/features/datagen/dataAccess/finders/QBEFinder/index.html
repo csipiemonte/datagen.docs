@@ -1,0 +1,213 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Elemento di catalogo: QBEFinder</title>
+      <link type="text/css" href="./../../..//css/style.css" rel="stylesheet"/>
+   </head>
+
+   <body>
+   	  <a href="./../../../dataAccess/finders/index.html">torna all'elenco degli elementi della sezione finders</a>
+   	  <h1>Elemento di catalogo: QBEFinder </h1>
+      <h2>Descrizione</h2>
+      <div class="itemDescription">
+      <p>
+Mediante questa operazione di ricerca &egrave; possibile effettuare query basate sul paradigma <b>QBE - Query By Examples</b>, che hanno come risultato uno o pi&ugrave;
+record.
+</p>
+      </div>
+      
+      <h2>Caratteristiche (features)</h2>
+      <table class="features">
+      <thead><th>cod.</th><th>nome</th><th>descrizione</th></thead>
+      <tbody>
+      
+	<tr>
+	<td class="featureCod">FNDQBE001</td>
+	<td class="featureName">select by examples</td>
+	<td class="featureDescr"><p>
+La modalit&agrave; di utilizzo del <b>FindByExamples</b> prevede la possibilit&agrave; di fornire in input al metodo di query due insiemi di esempi (positivi e negativi). A seconda
+del contenuto di tali esempi verranno inclusi o esclusi dal risultato i vari record della tabella associata al <b>DataAccessObject</b>; in particolare un record sar&agrave; incluso nell'
+insieme dei risultati se:
+<ul>
+<li>soddisfa almeno uno degli esempi positivi (criteri di inclusione)</li>
+<li>non soddisfa nessuno degli esempi negativi (criteri di esclusione)</li>
+</ul> 
+</p>
+<p>
+Il parametro di input &egrave; unico e pu&ograve; assumere una delle seguenti forme:
+<ol>
+<li>pu&ograve; essere la classe del <i>dto</i> associata al <b>DataAccessObject</b></li>
+<li>pu&ograve; essere un array ([]) di oggetti che hanno come tipo la classe del <i>dto</i> associata al <b>DataAccessObject</b></li>
+<li>pu&ograve; essere una classe java qualsiasi (il cui <i>full qualified name</i> deve essere fornito dall'utente)</li>
+</ol>
+</p>
+<p>
+Ciascun esempio permette di specificare un <b>FieldCheck<b> su ciascuno dei campi del DTO associato al DAO. Un esempio &egrave; da ritenersi soddisfatto se soddisfa tutti i check impostati in quell'esempio. 
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE002</td>
+	<td class="featureName">read main table columns</td>
+	<td class="featureDescr"><p>
+Il risultato della operazione contiene tutte le colonne della tabella principale associata al <b>DataAccessObject</b>, 
+a meno che non venga utilizzata la funzione di <b>LookupResolver</b> (v.)
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE003</td>
+	<td class="featureName">read resolved lookup</td>
+	<td class="featureDescr"><p>
+A fronte della presenza nel <b>DataAccessObject</b> di un <b>LookupResolver</b>, il risultato della operazione contiene il DTO di lookup invece che le colonne 
+corrispondenti alla <b>ForeignKey</b>. Il nome della property &egrave; derivato dall'attributo <i>name</i> del <b>LookupResolver</b>.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE004</td>
+	<td class="featureName">select distinct</td>
+	<td class="featureDescr"><p>
+Permette di effettuare una selezione di record coerentemente con la sintassi <i>select distinct</i> del linguaggio SQL. E' possibile indicare una o pi&ugrave; colonne. Il risultato della query
+sar&agrave; tale che:
+<ul>
+<li>in ciascun DTO saranno valorizzati soltanto i campi corrispondenti alle colonne incluse nella clausola distinct</li>
+<li>nella lista dei risultati ogni distinta n-upla di valori distinti sar&agrave; contenuta una sola volta</li>
+</ul> 
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE005</td>
+	<td class="featureName">equality check (dati numerici)</td>
+	<td class="featureDescr"><p>
+Permette di verificare se il valore di una colonna di tipo numerico coincide esattamente con un valore costante. E' possibile anche negare il criterio.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE006</td>
+	<td class="featureName">range check (dati numerici)</td>
+	<td class="featureDescr"><p>
+Permette di verificare se il valore di una colonna di tipo numerico appartiene ad un intervallo tra due valori costanti (oppure se si specifica un solo valore, di verificare se il valore della colonna
+&egrave; nel semiasse corretto rispetto al valore specificato. Nel caso in cui siano specificati due estremi viene utilizzato il costrutto SQL <i>between</i>, mentre nel caso in cui sia specificato solo uno dei due estremi viene utilizzato l'operatore di confronto '&lt;' o '&gt;'. E' inoltre possibile specificare se gli estremi sono inclusi o meno tra i valori ammessi. E' possibile anche negare il criterio.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE007</td>
+	<td class="featureName">null check</td>
+	<td class="featureDescr"><p>
+Permette di verificare se il valore di una colonna &egrave; nullo. E' possibile anche negare il criterio.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE008</td>
+	<td class="featureName">equality check (dati testuali)</td>
+	<td class="featureDescr"><p>
+Permette di verificare se il valore di una colonna di tipo stringa coincide esattamente con un valore costante. Se la costante contiene il carattere '%' viene utilizzato il costrutto
+<i>like</i>. E' possibile anche negare il criterio e ignorare le differenze di <i>case</i> nel testo.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE009</td>
+	<td class="featureName">equality check (dati di tipo 'data')</td>
+	<td class="featureDescr"><p>
+Permette di verificare se il valore di una colonna di tipo data coincide esattamente con un valore costante. E' possibile anche negare il criterio.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">FNDQBE010</td>
+	<td class="featureName">range check (dati di tipo data)</td>
+	<td class="featureDescr"><p>
+Permette di verificare se il valore di una colonna di tipo data appartiene ad un intervallo tra due valori costanti (oppure se si specifica un solo valore, di verificare se il valore della colonna
+&egrave; nel semiasse corretto rispetto al valore specificato. Nel caso in cui siano specificati due estremi viene utilizzato il costrutto SQL <i>between</i>, mentre nel caso in cui sia specificato solo uno dei due estremi viene utilizzato l'operatore di confronto '&lt;' o '&gt;'. E' inoltre possibile specificare se gli estremi sono inclusi o meno tra i valori ammessi. E' possibile anche negare il criterio.
+</p>
+	</td>
+	</tr>
+
+      
+      </tbody>
+      </table>
+      
+      
+      <h2>Grado di implementazione delle varie caratteristiche</h2>
+      <p>
+      Nella tabella seguente &egrave; riportato il grado di implementazione delle
+      varie caratteristiche/funzioni dell'elemento <b>QBEFinder</b> nelle differenti implementazioni.
+      </p>
+      
+
+<table class="compMatrixTable">
+<thead>
+<tr><th class="matrixTH" rowspan="3">cod</th><th class="matrixTH" rowspan="3">feature</th>
+ <th colspan="1" class="matrixTH product">datagen</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th colspan="1" class="matrixTH productVersion">2.0.0</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th class="matrixTH productEdition">standard</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>FNDQBE001</td><td class="feature">select by examples</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE002</td><td class="feature">read main table columns</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE003</td><td class="feature">read resolved lookup</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE004</td><td class="feature">select distinct</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE005</td><td class="feature">equality check (dati numerici)</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE006</td><td class="feature">range check (dati numerici)</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE007</td><td class="feature">null check</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE008</td><td class="feature">equality check (dati testuali)</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE009</td><td class="feature">equality check (dati di tipo 'data')</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>FNDQBE010</td><td class="feature">range check (dati di tipo data)</td>
+<td><img src="./../../../img/yes.gif" /></td>
+</tr>
+
+</tbody>
+</table>
+
+   </body>
+</html>

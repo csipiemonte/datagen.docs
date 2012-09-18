@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Guida: lookup resolvers</title>
+   </head>
+
+   <body>
+      <h2>
+         Guida: risoluzione tabelle di decodifica tramite Lookup Resolvers
+      </h2>
+      <p>
+         Questa guida descrive l'utilizzo della feature denominata <b>LookupResolver</b>
+         per la risoluzione automatica delle associazioni N-1, tipicamente utilizzate nel caso
+         di tabelle di decodifica.
+      </p>
+      <h3>Introduzione</h3>
+	<p>
+		Il <b>LookupResolver</b> &egrave; un costrutto associabile ad ogni <b>DataAccessObject</b>.
+		Come facilmente intuibile dal nome, esso permette di <i>risolvere i lookup</i> associati
+		ad una determinata tabella. Per <i>lookup</i> intendiamo il reperimento di elementi 
+		informativi associati in relazione N-1, spesso descritti come <i>tabelle di decodifica</i>.
+		Tipicamente il lookup coinvolge almeno due tabelle:
+		<ol>
+		<li>La tabella principale che referenzia la tabella di decodifica tramite
+		una foreign-key</li>
+		<li>La tabella di decodifica, contenente informazioni aggiuntive (es. descrizione)
+		oltre alla primary-key che permette alle altre tabelle principali di effettuare il collegamento.</li>
+		</ol>
+	</p>     
+	<p>
+		Un esempio di tale struttura pu&ograve; essere quello relativo alla struttura relazionale
+		descritta di seguito. 
+	<ul>
+	<li>
+	la tabella ANAGRAFICA contiene quattro colonne:
+		<ul>
+		<li>NOME (varchar2) : colonna informativa</li>
+		<li>COGNOME (varchar2): colonna informativa</li>
+		<li>CODICE_PROVINCIA (number): colonna con vincolo di chiave esterna verso la chiave primaria 
+			ID_PROVINCIA della tabella PROVINCIE</li>
+		<li>CODICE_REGIONE (number): colonna con vincolo di chiave esterna verso la chiave primaria 
+			ID_REGIONE della tabella REGIONI</li>
+		</ul>
+	</li>
+	<li>
+	la tabella PROVINCIE contiene due colonne:
+		<ul>
+		<li>ID_PROVINCIA  (number): chiave primaria</li>
+		<li>DESCRIZIONE_PROVINCIA (varchar2): colonna informativa</li>
+		</ul>
+	</li>
+	<li>
+	la tabella REGIONI contiene due colonne:
+		<ul>
+		<li>ID_REGIONE  (number): chiave primaria</li>
+		<li>DESCRIZIONE_REGIONE (varchar2): colonna informativa</li>		
+		</ul>
+	</li>
+	</ul>
+		
+		
+	<img src="img/figura1.jpg" />
+	</p>
+	<p>
+		Nell'utilizzo classico, (ovvero senza l'impiego del <b>LookupResolver</b>), quando 
+		si utilizza il DAO per accedere ai dati della tabella ANAGRAFICA, si ottiene un risultato 
+		costitutito da uno o pi&ugrave; DTO i cui campi corrispondono (in nome e in tipo) alle colonne della 
+		tabella ANAGRAFICA. 
+	</p>
+	<p>
+		Qualora ci fosse la necessit&agrave; di recuperare le informazioni estese dei due campi, ovvero 
+		DESCRIZIONE_PROVINCIA e DESCRIZIONE_REGIONE, ad esempio perch&egrave; &egrave; necessario
+		visualizzare a video la regione di residenza, nella modalit&agrave; tradizionale &egrave;
+		necessario effettuare altri due 
+		accessi in chiave primaria alle tabelle di decodifica, rispettivamente PROVINCIE e REGIONI. 
+		E' per&ograve; possibile utilizzare il <b>LookupResolver</b> per:
+		<ul>
+		<li>fare in modo che i DTO contengano dei campi strutturati corrispondenti ai DTO relativi
+		alle tabelle in foreign-key</li>
+		<li>fare in modo che il DAO della tabella principale possa automaticamente <i>risolvere</i>
+		le associazioni di decodifica ricostruendo l'oggetto completo</li>
+		</ul>
+	</p> 
+	<h3>Utilizzo della funzionalit&agrave;</h3>
+	<p>	Supponiamo di avere a disposizione il modello dello schema relazionale dell'esempio e un 
+		modello di accesso ai dati nel quale verranno inseriri i vari DAO.
+		Definiamo pertanto tre DAO: anagrafica, provincie, regioni.
+	</p>
+	<p>
+		I <b>Lookup Resolver</b> sono elementi associabili a ciascun <b>Data Access Object</b>. 
+		Tutti i <b>LookupResolver</b> di un DAO devono essere contenuti in un elemento di tipo
+		<b>LookupResolvers</b>, a sua volta contenuto nel <b>DataAccessObject</b>.
+		Nel caso in esame, si suppone di dover effettuare la lookup sulle tabelle PROVINCIE e 
+		REGIONI, pertanto &egrave; necessario definire due resolver associati al dao angrafica
+		e alle due foreign key che dalla tabella ANAGRAFICA puntano alle due tabelle PROVINCIE
+		e REGIONI.
+
+	</p>
+	<img src="img/figura2.jpg" />
+	<p>
+		Ogni resolver si compone di tre properties specifiche:
+	<ul>
+	<li>Foreign Key: rappresenta il riferimento alla chiave esterna della tabella master (ANAGRAFICA nell'esempio)
+	che permette di reperire il record corretto della tabella associata (PROVINCIE o REGIONI nell'esempio). 
+	</li>
+	<li>Supplier DAO: il riferimento al data access object che verr&agrave; utilizzato per risolvere la lookup.</li>
+	<li>Name: nome simbolico (opzionale) che verr&agrave; utilizzato (se presente) come nome della 
+	propriet&agrave; JAVA associata all'oggetto risolto. Se non specificato tale property avr&agrave;
+	invece il nome della foreign key stessa.</li>
+	</ul>
+	Questa configurazione fa intravedere il principio secondo il quale avviene effettivamente la
+	risoluzione del lookup, ovvero mediante <i>delega</i> da parte del DAO principale ai DAO
+	associati alle tabelle di lookup.
+	</p>
+	<p>
+	Nel caso dell'esempio avremo pertanto:
+	<ul>
+	<li>resolver su tabella PROVINCIE:
+		<ul>
+		<li>Name: null (ad esempio)
+		<li>Foreign Key: fk_ANAGRAFICA_FK_PROVINCIA</li>
+		<li>Supplier DAO: Data Access Object provincie</li>
+		</ul>
+	</li>
+	<li>resolver per la tabella REGIONI:
+		<ul>
+		<li>Name: null (ad esempio)
+		<li>Foreign Key: fk_ANAGRAFICA_FK_REGIONI</li>
+		<li>Supplier DAO: Data Access Object regioni</li>
+		</ul>
+	</li>
+	</ul>
+	</p>
+	<img src="img/figura3.jpg" />
+	<p>
+ 	Si osservi che, operativamente, durante la modellazione del <b>LookupResolver</b>, una volta selezionata
+ 	la foreign key, le possibili scelte circa il Supplier DAO si restringono ai DAO relativi alla tabella
+ 	effettivamente referenziata dalla foreign-key selezionata appena prima. E' pertanto importante rispettare
+ 	l'ordine di selezione degli elementi nel modello. 
+	</p>
+	<p>
+	Poich&egrave; la risoluzione delle decodifiche avviene tramite delega ai dao <i>supplier</i>
+	&egrave; necessario che ciascun Supplier DAO definito nei vari resolver presenti il finder 
+	"findByPK". E' importante altres&igrave; notare che tutti i passi appena elencati non differiscono
+	nel caso di foreign key composite.
+	</p>
+	<img src="img/figura4.jpg" />
+	<h3>Note sul codice generato</h3>
+	<p>
+	A fronte dell'utilizzo di un <b>LookupProvider</b> si ottiene un codice dei DAO leggermente
+	differente da quello ottenuto nel caso in cui non si utilizzino i <b>LookupResolver</b>:
+	<ul>
+	<li>
+	Il DTO della tabella <i>master</i> (ANAGRAFICA) contiene, oltre ai campi relativi alle colonne chiave 
+	primaria e i campi informativi della tabella stessa, anche dei campi <i>strutturati</i> del tipo del DTO 
+	delle tabelle referenziate. Ad esempio il DTO <i>Anagrafica</i>  conterr&agrave;
+	i seguenti campi:
+		<ul>
+		<li>String nome</li>
+		<li>String cognome</li>
+		<li>Provincia fkAnagraficaFkProvincia</li>
+		<li>Regione fkAnagraficaFkRegione</li>
+		</ul>
+	</li>
+	<li>
+	Il DAO di Anagrafica referenzier&agrave; tramite <i>spring</i> i DAO di Provincie e Regioni
+	</li>
+	<li>
+	Il RowMapper acceder&agrave; ai <i>DAO supplier</i> per ricostruire gli attributi &quot;risolti&quot;, 
+	effettuando una <code>findByPrimaryKey</code> su tali DAO.
+	</li>
+	<li>
+	La classe <i>Example</i> relativa alla tabella principale (ed utilizzata nella modalit&grave;
+	di query denominata <i>query by example - QBE</i>) contiene, in corrispondenza ai campi
+	<i>risolti</i> tramite <b>LookupProvider</b>, un oggetto del tipo dell'<i>Example</i> 
+	corrispondente alla tabella risolta (Es. AnagraficaExample contiene un campo di tipo RegioneExample).
+	</li>
+	</ul>
+	</p>
+	<h3>Effetto sulle operazioni di scrittura (insert/update)</h3>
+	<p>La presenza di un <b>LookupResolver</b> non ha particolari effetti sulle operazioni
+	di scrittura (insert/update), a parte il fatto che durante le operazioni di insert e update
+	vengono utilizzati solo i valori di primo livello, ossia:
+		<ul>
+		<li>i campi chiave della tabella in oggetto</li>
+		<li>i campi descrittivi della tabella in oggetto</li>
+		<li>i campi FK per cui non esista un <b>LookupResolver</b></li>
+		<li>i campi chiave dei campi strutturati derivanti dalla definizione di un <b>LookupResolver</b>
+		(es. il campo codProvincia del DTO Provincia contenuto nel DTO Anagrafica)
+		</ul>
+	</p>	
+	<h3>Effetto sulle operazioni di delete</h3>
+	<p>La presenza di un <b>LookupResolver</b> non modifica il comportamento delle
+	operazioni di delete</p>
+	<h3>Effetto sulle operazioni di lettura (finder di vario genere)</h3>
+	<p>
+	Il <b>LookupResolver</b> &egrave; specificamente studiato per le operazioni di lettura.
+	L'effetto principale &egrave; quello gi&agrave; ampiamente descritto e consiste nella
+	differente profondit&agrave; di popolamento dei DTO di risposta alla query.
+	In particolare &egrave; per&ograve; importante notare come il meccanismo di strutturazione
+	pu&ograve; essere sfruttato anche nella modalit&agrave; QBE.
+	</p>
+	<h4>Limitazioni</h4>
+	<p>
+	Attualmente sussistono alcune limitazioni derivanti dall'utilizzo del <b>LookupResolver</b>.
+	<ul>
+	<li>E' possibile gestire con un <b>LookupResolver</b> solo foreign-key che non appartengano 
+	a loro volta a primary key della tabella principale.
+	</li>
+	<li>Non &egrave; possibile definire strutture cicliche di <b>LookupResolver</b></li>
+	<li>Nella modalit&agrave; di query denominata query-by-example non &egrave; possibile 
+	esplicitare un criterio di filtro su un campo non chiave di una tabella risolta 
+	(ad esempio in un <code>findByExamples</code> relativo alla tabella <i>Anagrafica</i>, non 
+	sar&agrave; possibile utilizzare un esempio che contenga, per esempio, un filtro sul 
+	<i>nome</i> della regione, ma solo sul suo identificativo)</li>
+	</ul>      
+    </p>  
+    <h3>Ulteriori note</h3>
+    <p>
+    Il meccanismo di <b>LookupResolver</b> spesso &egrave; utilizzato per risolvere il lookup
+    di tabelle di decodifica: questa tipologia di tabelle spesso possiedono la caratteristica
+    di presentare una alta stabilit&agrave; per quanto riguarda l'insieme dei record (es. le provincie, 
+    i comuni, ...). In queste condizioni risulta pertanto molto utile abbinare al meccanismo
+    del <b>LookupResolver</b> il meccanismo di <i>DAO cache</i> relativamente ai DAO delle tabelle 
+    di decodifica. In questo modo l'operazione di risoluzione del lookup avviene in memoria senza accesso
+    al DB, con un evidente miglioramento delle prestazioni. Per impostare la cache su un DAO &egrave; 
+    necessario definire i suoi dati come <i>ALMOST_STABLE_DATA</i> e questa operazione pu&ograve;
+    essere effettuata agendo sul modello, nelle property dell'oggetto <b>DataAccessObject</b>.
+    </p> 
+    <h3>Approfondimenti</h3>
+    <p>Esempi pratici dell'utilizzo del <b>LookupResolver</b> si possono trovare all'interno
+    della <i>Reference Application MDD</i>.</p>
+   </body>
+</html>

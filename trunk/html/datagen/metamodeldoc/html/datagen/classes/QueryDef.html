@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Developer documentation for the model class QueryDef</title>
+	</head><body>
+<h1>Class "datagen :: QueryDef"</h1>
+<p>Defined in package : <img src="../../icons/ecore/EPackage.gif" /><a href="../../datagen/package.html">datagen</a></p>
+<p>Definizione della query da eseguire. Utilizzando questo tipo di modellazione 
+&egrave; possibile modellare interamente la query senza limitazioni sulla struttura
+dei campi in output, delle tabelle coinvolte, dei criteri di join.
+L'utilizzo di questa modalit&agrave; inibisce la possibilit&agrave;/necessit&agrave;
+di scrivere codice java per implementare la query.  </p>
+
+
+
+
+
+
+
+<table border="1">
+
+
+<tr style="vertical-align:top">
+
+
+
+
+
+<td>
+<p>Direct References</p>
+<ul>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/FromClause.html">datagen :: FromClause</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/QueryDef.html#re_fromClause">fromClause</a></li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/JoinClause.html">datagen :: JoinClause</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/QueryDef.html#re_joinClause">joinClause</a></li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/SelectClause.html">datagen :: SelectClause</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/QueryDef.html#re_selectClause">selectClause</a></li>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/WhereClause.html">datagen :: WhereClause</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/QueryDef.html#re_whereClause">whereClause</a></li>
+</ul>
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+<p>Referenced by</p>
+<ul>
+	<li><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/QueryDef.html">datagen :: QueryDef</a> <img src="../icons/ecore/EReference.gif" /><a href="../../datagen/classes/CustomFinder.html#re_queryDefinition">queryDefinition</a> (<img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/CustomFinder.html">datagen :: CustomFinder</a>)</li>
+</ul>
+
+
+<h2><a name="re_fromClause" /><img src="../icons/ecore/EReference.gif" />Reference datagen :: FromClause fromClause</h2>
+<p>Elenco delle tabelle incluse nella query. A ciascuna Tabella pu&ograve; essere associato un <i>alias</i></p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/FromClause.html">datagen :: FromClause</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>containment</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>fromClause</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>resolveProxies</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="re_joinClause" /><img src="../icons/ecore/EReference.gif" />Reference datagen :: JoinClause joinClause</h2>
+<p>Elenco (opzionale) dei cirteri di <i>join</i> che devono essere applicati alle
+tabelle referenziate nella <b>FromClause</b>.</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/JoinClause.html">datagen :: JoinClause</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>containment</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>joinClause</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>resolveProxies</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="re_selectClause" /><img src="../icons/ecore/EReference.gif" />Reference datagen :: SelectClause selectClause</h2>
+<p>Determina l'elenco delle colonne che costituiscono il risultato della query.
+Le colonne possono essere di due tipi: 
+<ul>
+<li>colonne appartenenti ad una qualsiasi delle tabelle coinvolte (ovvero quelle
+referenziate nella <b>FromClause</b></li>
+<li>colonne <i>calcolate</i>, ottenute ad esempio applicando funzioni di
+aggregazione a colonne effettive (es. somma), oppure applicando altri tipi di funzioni ad
+una o pi&ugrave; colonne effettive (es. concatenzaione)</li>
+</ul>
+Il DTO associato al <b>CustomFinder</b> che utlizza questo tipo di costrutto
+conterr&agrave; i campi necessari a contenenre adeguatamente i risultati della
+query e non sar&agrave; il DTO classico associato al DAO.</p>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/SelectClause.html">datagen :: SelectClause</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>containment</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>selectClause</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>resolveProxies</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+<h2><a name="re_whereClause" /><img src="../icons/ecore/EReference.gif" />Reference datagen :: WhereClause whereClause</h2>
+
+
+
+<table border="1">
+<thead>
+<tr><th>Property</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td><img src="../../icons/ecore/EClass.gif" /><a href="../../datagen/classes/WhereClause.html">datagen :: WhereClause</a></td></tr>
+
+<tr><td>changeable</td><td>true</td></tr>
+
+
+<tr><td>containment</td><td>true</td></tr>
+
+
+<tr><td>defaultValueLiteral</td><td>null</td></tr>
+
+
+<tr><td>derived</td><td>false</td></tr>
+
+
+<tr><td>lowerBound</td><td>0</td></tr>
+
+
+<tr><td>name</td><td>whereClause</td></tr>
+
+
+<tr><td>ordered</td><td>true</td></tr>
+
+
+<tr><td>resolveProxies</td><td>true</td></tr>
+
+
+<tr><td>transient</td><td>false</td></tr>
+
+
+<tr><td>unique</td><td>true</td></tr>
+
+
+<tr><td>unsettable</td><td>false</td></tr>
+
+
+<tr><td>upperBound</td><td>1</td></tr>
+
+
+<tr><td>volatile</td><td>false</td></tr>
+
+
+</tbody>
+</table>
+
+
+
+<div>generated on 23-nov-2011 at 17.50.28 by <a href="http://metamodeldoc.randomice.net">metamodeldoc</a></div></body></html>

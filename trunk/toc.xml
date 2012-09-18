@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="MDDTools - Datagen User&apos;s guide" topic="html/datagen/overview.html">
+	<topic href="html/datagen/overview.html" label="Datagen">
+    <topic href="html/datagen/howto_start.html" label="How to start">
+    </topic>
+    <topic href="html/datagen/tutorials.html" label="Tutorials">
+       <topic href="html/datagen/tutorials/helloworld/helloworld.html" label="Tutorial: hello data!">
+       </topic>
+    </topic>
+    <topic href="html/datagen/features/datagen/index.html" label="Features">
+    </topic>
+    <topic href="html/datagen/mm_reference.html" label="Guida di riferimento metamodello">
+    </topic>
+    <topic href="html/datagen/models_structure.html" label="Struttura e dipendenza dei modelli">
+    </topic>
+    <topic href="html/datagen/wizards.html" label="Wizard di modellazione">
+       <topic href="html/datagen/wizards.html" label="Reverse engineering dello schema DB">
+       </topic>
+    </topic>
+    <topic href="html/datagen/cartridges.html" label="Cartridges">
+    </topic>
+    <topic href="html/datagen/faq.html" label="F.A.Q.">
+    </topic>
+    <topic href="html/datagen/guides/guides.html" label="Guide">
+       <topic href="html/datagen/guides/lookupresolvers/index.html" label="Risoluzione tabelle decodifica tramite LookupResolver">
+       </topic>
+       <topic href="html/datagen/guides/qbe/index.html" label="QBE - Query by example">
+       </topic>
+       <topic href="html/datagen/guides/querydef/index.html" label="Custom finder multitabella con query modellata">
+       </topic>
+    </topic>
+    <topic href="html/datagen/rationale.html" label="Appendice: design rationale">
+    </topic>
+    <topic href="html/datagen/bibl.html" label="Appendice: documenti di riferimento">
+    </topic>
+ </topic>
+</toc>

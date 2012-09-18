@@ -1,0 +1,129 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>Elemento di catalogo: DataAccessObject</title>
+      <link type="text/css" href="./../..//css/style.css" rel="stylesheet"/>
+   </head>
+
+   <body>
+   	  <a href="./../../dataAccess/index.html">torna all'elenco degli elementi della sezione dataAccess</a>
+   	  <h1>Elemento di catalogo: DataAccessObject </h1>
+      <h2>Descrizione</h2>
+      <div class="itemDescription">
+      <p>
+Il <b>DataAccessObject</b> rappresenta l'astrazione dell'oggetto che effettua l'accesso ai dati. In particolare un <b>DataAccessObject</b>
+agisce su una singola <b>Table</b>, anche se in alcuni casi e per alcune funzionalit&agrave; &egrave; possibile che vengano coinvolte nell'accesso ai dati
+pi&ugrave; tabelle.
+</p>
+      </div>
+      
+      <h2>Caratteristiche (features)</h2>
+      <table class="features">
+      <thead><th>cod.</th><th>nome</th><th>descrizione</th></thead>
+      <tbody>
+      
+	<tr>
+	<td class="featureCod">DAO001</td>
+	<td class="featureName">basic DTO for main table</td>
+	<td class="featureDescr"><p>
+Il DTO associato alle operazioni di un <b>DataAccessObject</b> &egrave; normalmente costruito come l'insieme delle property
+corrispondenti a ciascuna delle colonne della <b>Table</b> associata al <b>DataAccessObject</b>. Gran parte delle operazioni
+previste per il <b>DataAccessobject</b> utilizzano questo DTO come input/output.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">DAO002</td>
+	<td class="featureName">lookup resolver</td>
+	<td class="featureDescr"><p><p>
+E' possibile associare ad un <b>DataAccesObject</b> uno o pi&ugrave; <b>LookupResolver</b> (uno per ciascuna delle foreign key
+definite per la tabella associata al <b>DataAccessObject</b>).
+</p>
+	
+		<ul>
+	
+		<li>
+			<a href="./../../dataAccess/LookupResolver/index.html">LookupResolver</a>
+		</li>
+
+		</ul>
+
+	</p>
+	<p>
+	</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">DAO003</td>
+	<td class="featureName">caching strategy: Almost Stable Data</td>
+	<td class="featureDescr"><p>
+E' possibile dichiarare i dati della tabella associata al <b>DataAccessObject</b> come <i>altamente stabili</i>. In queste condizioni di 
+movimentazione dei dati &egrave; possibile fare in modo che alcune delle operazioni di lettura (tipicamente la lettura per chiave primaria)
+siano ottimizzate, evitando la realizzazione della query ad ogni singola richiesta. E' possibile definire puntualmente il tempo di permanenza in
+cache del dato.
+</p>
+	</td>
+	</tr>
+
+	<tr>
+	<td class="featureCod">DAO004</td>
+	<td class="featureName">caching strategy: Highly Variable Data</td>
+	<td class="featureDescr"><p>
+E' possibile dichiarare i dati della tabella associata al <b>DataAccessObject</b> come <i>altamente variabili</i>. In queste condizioni di 
+movimentazione dei dati non &egrave; possibile implementare meccanismi di caching sulle operazioni di lettura del <b>DataAccessObject</b>,
+e la query viene realizzata ad ogni singola richiesta.
+</p>
+	</td>
+	</tr>
+
+      
+      </tbody>
+      </table>
+      
+      
+      <h2>Grado di implementazione delle varie caratteristiche</h2>
+      <p>
+      Nella tabella seguente &egrave; riportato il grado di implementazione delle
+      varie caratteristiche/funzioni dell'elemento <b>DataAccessObject</b> nelle differenti implementazioni.
+      </p>
+      
+
+<table class="compMatrixTable">
+<thead>
+<tr><th class="matrixTH" rowspan="3">cod</th><th class="matrixTH" rowspan="3">feature</th>
+ <th colspan="1" class="matrixTH product">datagen</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th colspan="1" class="matrixTH productVersion">2.0.0</th>
+</tr>
+<tr><!--<th class="matrixTH"></th><th class="matrixTH"></th>-->
+<th class="matrixTH productEdition">standard</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td>DAO001</td><td class="feature">basic DTO for main table</td>
+<td><img src="./../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>DAO002</td><td class="feature">lookup resolver</td>
+<td><img src="./../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>DAO003</td><td class="feature">caching strategy: Almost Stable Data</td>
+<td><img src="./../../img/yes.gif" /></td>
+</tr>
+<tr>
+<td>DAO004</td><td class="feature">caching strategy: Highly Variable Data</td>
+<td><img src="./../../img/yes.gif" /></td>
+</tr>
+
+</tbody>
+</table>
+
+   </body>
+</html>
