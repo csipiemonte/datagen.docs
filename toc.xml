@@ -35,5 +35,7 @@
     </topic>
     <topic href="html/datagen/bibl.html" label="Appendice: documenti di riferimento">
     </topic>
+    <topic href="html/datagen/javadoc/index.html" label="Documentazione javadoc">
+    </topic>
  </topic>
 </toc>
