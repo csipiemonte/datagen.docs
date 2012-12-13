@@ -13,6 +13,8 @@
     </topic>
     <topic href="html/datagen/mm_reference.html" label="Guida di riferimento metamodello">
     </topic>
+    <topic href="html/datagen/javadoc/index.html" label="Documentazione javadoc">
+    </topic>
     <topic href="html/datagen/models_structure.html" label="Struttura e dipendenza dei modelli">
     </topic>
     <topic href="html/datagen/wizards.html" label="Wizard di modellazione">
@@ -34,8 +36,6 @@
     <topic href="html/datagen/rationale.html" label="Appendice: design rationale">
     </topic>
     <topic href="html/datagen/bibl.html" label="Appendice: documenti di riferimento">
-    </topic>
-    <topic href="html/datagen/javadoc/index.html" label="Documentazione javadoc">
     </topic>
  </topic>
 </toc>
